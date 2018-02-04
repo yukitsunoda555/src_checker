@@ -14,10 +14,10 @@ root_dir = ARGV[0]
 
 checker = Checker.new()
 
-# checker.add_check_matters(
-#   Condition.match(/.*begin*/),
-#   Action.print("BEGIN")
-# )
+checker.add_check_matters(
+  Condition.match(/.*begin*/),
+  Action.print("BEGIN")
+)
 
 checker.add_check_matters(
   Condition.custom do |line, i, file_name|
@@ -28,7 +28,6 @@ checker.add_check_matters(
     end
 
     @flag = true if line.match(/.*custom.*/)
-    #p "#{@flag} line:#{i}"
 
     if @flag
       line.match(/.*begin*/)
@@ -36,7 +35,7 @@ checker.add_check_matters(
       false
     end
   end,
-  Action.print("BEGIN")
+  Action.print("CHANGE_BEGIN")
 )
 
 begin
